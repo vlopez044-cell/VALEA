@@ -1,0 +1,31 @@
+body{
+padding-top:20px;
+background:#fff;
+}
+
+.mi-navbar{
+background:#ff2d96;
+}
+
+.carousel-item{
+height:500px;
+}
+
+.carousel-item img{
+height:500px;
+object-fit:cover;
+}
+
+.card{
+margin-bottom:20px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+.card img{
+height:250px;
+object-fit:cover;
+}
+
+footer{
+background:#f8f9fa;
+}
