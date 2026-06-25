@@ -1,1 +1,109 @@
-console.log("Página VALÉA cargada correctamente");
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+// =======================
+// MOSTRAR / OCULTAR CARRITO
+// =======================
+function toggleCarrito(){
+document.getElementById("carrito").classList.toggle("activo");
+}
+
+// =======================
+// AGREGAR AL CARRITO
+// =======================
+function agregarCarrito(nombre, precio){
+
+carrito.push({nombre, precio});
+guardarCarrito();
+renderCarrito();
+
+}
+
+// =======================
+// RENDER CARRITO
+// =======================
+function renderCarrito(){
+
+let contenedor = document.getElementById("itemsCarrito");
+contenedor.innerHTML = "";
+
+let total = 0;
+
+carrito.forEach((item, index) => {
+
+total += item.precio;
+
+contenedor.innerHTML += `
+<div class="item-carrito">
+<span>${item.nombre}</span>
+<span>$${item.precio}</span>
+<button onclick="eliminarItem(${index})">❌</button>
+</div>
+`;
+
+});
+
+document.getElementById("total").innerText = total;
+document.getElementById("contadorCarrito").innerText = carrito.length;
+
+}
+
+// =======================
+// ELIMINAR ITEM
+// =======================
+function eliminarItem(index){
+carrito.splice(index,1);
+guardarCarrito();
+renderCarrito();
+}
+
+// =======================
+// VACIAR CARRITO
+// =======================
+function vaciarCarrito(){
+carrito = [];
+guardarCarrito();
+renderCarrito();
+}
+
+// =======================
+// GUARDAR EN LOCALSTORAGE
+// =======================
+function guardarCarrito(){
+localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+// =======================
+// FAVORITOS (corazón)
+// =======================
+function favorito(btn){
+
+if(btn.classList.contains("activo")){
+btn.classList.remove("activo");
+btn.innerText = "🤍";
+}else{
+btn.classList.add("activo");
+btn.innerText = "❤️";
+}
+
+}
+
+// =======================
+// SUSCRIPCIÓN
+// =======================
+function suscribir(){
+
+let email = document.getElementById("email").value;
+let mensaje = document.getElementById("mensaje");
+
+if(email.includes("@")){
+mensaje.innerText = "¡Gracias por suscribirte 💖";
+}else{
+mensaje.innerText = "Correo inválido";
+}
+
+}
+
+// =======================
+// INICIALIZAR
+// =======================
+renderCarrito();
