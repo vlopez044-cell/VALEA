@@ -1,1 +1,1 @@
-console.log("VALÉA cargado correctamente");
+console.log("Página VALÉA cargada correctamente");
